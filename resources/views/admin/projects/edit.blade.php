@@ -15,6 +15,14 @@
         <label for="category">Categoria</label>
         <input type="text" name="category" value="{{ old('category', $project->category) }}" class="form-control">
 
+        <label for="type">Categoria</label>
+        <select class="form-select" name="type_id" id="type">
+            <option value="">Seleziona un tipo</option>
+            @foreach($types as $type)
+            <option value="{{ $type->id }}" {{ $project->type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+            @endforeach
+        </select>
+
         <label for="description">Descrizione</label>
         <input type="textarea" name="description" value="{{ old('description', $project->description) }}" class="form-control">
 

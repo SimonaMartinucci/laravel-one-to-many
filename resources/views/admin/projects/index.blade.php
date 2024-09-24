@@ -8,6 +8,7 @@
       <tr>
         <th class="w-25" scope="col">Titolo</th>
         <th scope="col">Categoria</th>
+        <th scope="col">Tipo</th>
         <th scope="col">Inizio</th>
         <th scope="col">Fine</th>
         <th class="w-25" scope="col">URL</th>
@@ -19,6 +20,7 @@
       <tr>
         <th scope="row">{{ $project->title }}</td>
         <td scope="row">{{ $project->category }}</td>
+        <td scope="row">{{ $project->type ? $project->type->name : 'NESSUN TIPO' }}</td>
         <td scope="row">{{ \Carbon\Carbon::parse($project->start_date)->format('d/m/Y') }}</td>
         <td scope="row">{{ $project->end_date ? 'IN CORSO' : \Carbon\Carbon::parse($project->end_date)->format('d/m/Y') }}</td>
         <td scope="row">{{ $project->project_url }}</td>
@@ -29,7 +31,7 @@
           <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning">
             <i class="fa-solid fa-pencil"></i>
           </a>
-          <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="d-inline">
+          <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="d-inline" onsubmit="return confirm('Confermi l\'eliminazione del progetto {{ $project->name }}')">
           @csrf
           @method('DELETE')
             <button type="submit" class="btn btn-danger">

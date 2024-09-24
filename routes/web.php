@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Guest\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function(){
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::get('type-projects', [TypeController::class, 'typeProjects'])->name('typeProjects');
         Route::resource('projects', ProjectController::class);
     });
 

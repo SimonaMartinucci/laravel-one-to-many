@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Project;
+use App\Models\Type;
 use App\Functions\Helper;
 
 class ProjectsTableSeeder extends Seeder
@@ -17,6 +18,7 @@ class ProjectsTableSeeder extends Seeder
     {
         for($i = 0; $i < 30; $i++){
             $newProject = new Project();
+            $newProject->type_id = Type::inRandomOrder()->first()->id;
             $newProject->title = $faker->sentence(3);
             $newProject->slug = Helper::generateSlug($newProject->title, Project::class);
             $newProject->category = $faker->randomElement(['Web Development', 'Mobile App', 'Design', 'Data Science', 'Machine Learning']);

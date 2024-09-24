@@ -25,4 +25,14 @@ aside {
 
 .content {
     overflow-y: auto;
+    width: calc(100% - 180px);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        color: gray;
+    }
 }
