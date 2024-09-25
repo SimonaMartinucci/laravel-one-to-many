@@ -1,6 +1,6 @@
 <aside class="text-bg-dark py-4">
     
-    <ul>
+    <ul class="ps-3">
         <li class="mb-3">
             <a href="{{ route('admin.home') }}"><i class="fa-solid fa-house"></i> Home</a>
         </li>

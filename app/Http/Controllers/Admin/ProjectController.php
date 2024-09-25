@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
 use App\Functions\Helper;
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -31,7 +32,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
         $data = $request->all();
         $data['slug'] = Helper::generateSlug($data['title'], Project::class);
@@ -60,7 +61,7 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjectRequest $request, string $id)
     {
         $data = $request->all();
         $project = Project::find($id);
@@ -72,7 +73,7 @@ class ProjectController extends Controller
         };
 
         $project->update($data);
-        return redirect()->route('admin.projects.show', $project);
+        return redirect()->route('admin.projects.show', $project)->with('edited', 'Modifica avvenuta con successo');
 
     }
 
@@ -83,6 +84,6 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('deleted', 'Cancellazione avvenuta con successo');
     }
 }
